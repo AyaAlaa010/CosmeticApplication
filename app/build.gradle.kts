@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id ("kotlin-parcelize")
+
 }
 
 android {
@@ -38,7 +40,10 @@ android {
     }
     buildFeatures{
         dataBinding=true
+        buildConfig = true
+
     }
+
 
 }
 
@@ -59,7 +64,23 @@ dependencies {
     //HILT
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+
     // http & retrofit
     implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
+
+    // http & retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+    //
+    implementation ("androidx.activity:activity-ktx:1.7.2")
+    implementation ("androidx.fragment:fragment-ktx:1.6.1")
+
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.3")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation ("androidx.databinding:databinding-runtime:8.1.1")
 }

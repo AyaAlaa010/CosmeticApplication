@@ -1,10 +1,11 @@
-package com.aya.cosmeticapplication
+package com.aya.cosmeticapplication.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.aya.cosmeticapplication.R
 
 
 class AllProductsFragment : Fragment() {

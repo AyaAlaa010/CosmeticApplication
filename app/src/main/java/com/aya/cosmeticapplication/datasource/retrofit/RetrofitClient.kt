@@ -1,0 +1,73 @@
+package com.aya.cosmeticapplication.datasource.retrofit
+
+import com.aya.cosmeticapplication.BuildConfig
+import com.aya.cosmeticapplication.constants.AppData.BASE_URL
+import com.aya.cosmeticapplication.datasource.retrofit.utils.AuthInterceptor
+import com.aya.cosmeticapplication.datasource.retrofit.utils.NetworkConnectionInterceptor
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+class RetrofitDi {
+    @Singleton
+    @Provides
+    fun provideRetrofit  (
+        gson: Gson,
+        client: OkHttpClient,
+    ): Retrofit {
+        return  Retrofit.Builder().apply {
+            baseUrl(BASE_URL)
+            addConverterFactory(ScalarsConverterFactory.create())
+            addConverterFactory(GsonConverterFactory.create(gson))
+            client(client)
+        }.build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideGsonBuilder(): Gson {
+        return GsonBuilder().setLenient().create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(
+        networkConnectionInterceptor: NetworkConnectionInterceptor,
+        authInterceptor: AuthInterceptor
+
+    ): OkHttpClient {
+        return OkHttpClient.Builder().apply {
+            connectTimeout(60, TimeUnit.SECONDS)
+            readTimeout(60, TimeUnit.SECONDS)
+            writeTimeout(60, TimeUnit.SECONDS)
+            retryOnConnectionFailure(true)
+        }
+            .also {
+                val logInterceptor = HttpLoggingInterceptor()
+                logInterceptor.level = if (BuildConfig.DEBUG) {
+                    HttpLoggingInterceptor.Level.BODY
+                } else {
+                    HttpLoggingInterceptor.Level.NONE
+                }
+                it.addInterceptor(logInterceptor)
+            }
+        .also {
+            it.addInterceptor(networkConnectionInterceptor)
+        }
+        //.also { it.addInterceptor(authInterceptor) }
+            .build()
+    }
+
+}
