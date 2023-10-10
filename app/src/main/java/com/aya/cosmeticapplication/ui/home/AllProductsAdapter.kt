@@ -1,4 +1,4 @@
-package com.aya.cosmeticapplication.ui
+package com.aya.cosmeticapplication.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import com.aya.cosmeticapplication.R
 import com.aya.cosmeticapplication.databinding.ItemAllProductsBinding
 import com.aya.cosmeticapplication.datasource.beans.ProductDetailsBeans
 import com.aya.cosmeticapplication.datasource.beans.toProductDetailsModel
+import com.aya.cosmeticapplication.datasource.models.ProductDetailsModel
 import com.bumptech.glide.Glide
 
 
@@ -34,15 +35,23 @@ class AllProductsAdapter(var allProductList: ArrayList<ProductDetailsBeans>, val
 
 
     override fun onBindViewHolder(holder: ListHolder, position: Int) {
+        val product = allProductList.get(position).toProductDetailsModel()
+        setProductDataToViews(holder,product)
+        holder.itemView.setOnClickListener {
+        }
+    }
 
-        val item = allProductList.get(position).toProductDetailsModel()
-        holder.itemBinding.tvProductName.text = item.name
+    private fun setProductDataToViews(holder: ListHolder, product:ProductDetailsModel){
+        holder.itemBinding.tvProductName.text = product.name
 
         Glide.with(context)
-            .load(item.image_link)
+            .load(product.image_link)
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_background)
-            .into(holder.itemBinding.imgProductName);
+            .into(holder.itemBinding.imgProduct);
+
+
+
     }
 
 

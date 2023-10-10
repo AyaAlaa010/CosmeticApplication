@@ -1,4 +1,4 @@
-package com.aya.cosmeticapplication.ui
+package com.aya.cosmeticapplication.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -27,7 +27,7 @@ class AllProductsFragment : Fragment() {
     private val viewModel by viewModels<AllProductsViewModel>()
     lateinit var mView: View
     lateinit var loading: LoadingScreen
-    lateinit var adapterAllProducts:AllProductsAdapter
+    lateinit var adapterAllProducts: AllProductsAdapter
     lateinit var  allProductList:ArrayList<ProductDetailsBeans>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

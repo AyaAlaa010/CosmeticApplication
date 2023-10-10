@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/AllProductsFragment">
+    <fragment
+        android:id="@+id/AllProductsFragment"
+        android:name="com.aya.cosmeticapplication.ui.home.AllProductsFragment"
+        android:label="AllProductsFragment"
+        tools:layout="@layout/fragment_all_products">
+        <action
+            android:id="@+id/action_AllProductsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/FavouritesFragment"
+        android:name="com.aya.cosmeticapplication.ui.favourites.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" />
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.aya.cosmeticapplication.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.aya.cosmeticapplication.ui.home.ProductDetailsFragment"
+        android:label="ProductDetailsFragment"
+        tools:layout="@layout/fragment_product_details"/>
+</navigation>
