@@ -16,7 +16,7 @@ class AllProductRepositories @Inject constructor(val productsEndPoints: Products
                 emit(DataState.Success(response.body()))
             }
             else{
-                emit(DataState.Error("Something went wrong!!",null))
+                emit(DataState.Error(response.message(),null))
             }
         }
         catch (e:Exception){

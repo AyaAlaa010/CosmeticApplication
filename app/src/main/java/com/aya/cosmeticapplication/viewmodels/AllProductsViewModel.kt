@@ -52,6 +52,8 @@ class AllProductsViewModel @Inject constructor(
                                 this@AllProductsViewModel.allProductScreenState.value =
                                     AllProductScreenStates.AllProductInFailedSend(it.message!!)
                             }
+
+
                         }
                     }.handleErrors(application.applicationContext).launchIn(viewModelScope)
                 }

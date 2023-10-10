@@ -1,0 +1,36 @@
+package com.aya.cosmeticapplication.common
+
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.Window
+import android.widget.TextView
+import com.aya.cosmeticapplication.R
+
+object LoadingScreen {
+    var dialog: Dialog? = null
+    fun displayLoadingWithText(context: Context?, text: String?, cancelable: Boolean)
+    {
+        dialog = Dialog(context!!)
+        dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog!!.setContentView(R.layout.layout_loading_screen)
+        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog!!.setCancelable(cancelable)
+        val textView = dialog!!.findViewById<TextView>(R.id.text)
+        textView.text = text
+        try {
+            dialog!!.show()
+        } catch (_: Exception) {
+        }
+    }
+
+    fun hideLoading() {
+        try {
+            if (dialog != null) {
+                dialog!!.dismiss()
+            }
+        } catch (_: Exception) {
+        }
+    }
+}

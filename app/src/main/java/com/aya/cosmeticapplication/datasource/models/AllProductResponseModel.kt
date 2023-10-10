@@ -10,13 +10,13 @@ data class AllProductsResponseModel(val allProductlist: ArrayList<ProductDetails
 
 @Parcelize
 data class ProductDetailsModel(
-    val brand: String,
-    val description: String,
+    val brand: String?=null,
+    val description: String?=null,
     val id: Int,
-    val image_link: String,
-    val name: String,
-    val price: String,
-    val price_sign: String
+    val image_link: String?=null,
+    val name: String?=null,
+    val price: String?=null,
+    val price_sign: String?=null
 ): Parcelable
 
 @Parcelize
